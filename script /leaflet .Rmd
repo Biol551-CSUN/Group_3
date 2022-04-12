@@ -93,7 +93,7 @@ latitude <- data$latitude
 volcanonames <- data$volcano_name
 
 volcanomap <- basemap %>% 
-addCircleMarkers(lng = longitude, lat = latitude, popup = volcanonames, radius=3, color="#ffffd4", stroke=FALSE, fillOpacity=1) # add a single point layer
+addCircleMarkers(lng = longitude, lat = latitude, popup = volcanonames, radius=3, color="#ffffd14", stroke=FALSE, fillOpacity=1) # add a single point layer
 
 volcanomap
 
