@@ -36,8 +36,7 @@ sulfur <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tid
 Wrangling Data 
 ```{r}
 data <- full_join(volcano, eruptions) %>% 
-  filter(country == "United States",
-           last_eruption_year >= "1900") %>% 
+  filter(last_eruption_year >= "1900") %>% 
   select(-major_rock_1, -major_rock_2, -major_rock_3, -major_rock_4, -major_rock_5,
          -minor_rock_1, -minor_rock_2, -minor_rock_3, -minor_rock_4, -minor_rock_5,
          -population_within_5_km, -population_within_10_km, -population_within_30_km, -population_within_100_km,
