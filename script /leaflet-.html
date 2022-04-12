@@ -178,7 +178,8 @@ pre code {
 <div id="libraries" class="section level1">
 <h1>Libraries</h1>
 <pre class="r"><code>library(leaflet)
-library(tidyverse)</code></pre>
+library(tidyverse)
+library(dplyr)</code></pre>
 </div>
 <div id="data" class="section level1">
 <h1>Data</h1>
@@ -192,6 +193,12 @@ tree_rings &lt;- readr::read_csv(&#39;https://raw.githubusercontent.com/rfordata
 sulfur &lt;- readr::read_csv(&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/sulfur.csv&#39;)</code></pre>
 <p>Wrangling Data</p>
 <pre class="r"><code>data &lt;- full_join(volcano, eruptions) %&gt;% 
+  filter(country == &quot;United States&quot;,
+           last_eruption_year &gt;= &quot;1900&quot;) %&gt;% 
+  select(-major_rock_1, -major_rock_2, -major_rock_3, -major_rock_4, -major_rock_5,
+         -minor_rock_1, -minor_rock_2, -minor_rock_3, -minor_rock_4, -minor_rock_5,
+         -population_within_5_km, -population_within_10_km, -population_within_30_km, -population_within_100_km,
+         -vei) %&gt;% 
   drop_na()</code></pre>
 <pre><code>## Joining, by = c(&quot;volcano_number&quot;, &quot;volcano_name&quot;, &quot;latitude&quot;, &quot;longitude&quot;)</code></pre>
 </div>
