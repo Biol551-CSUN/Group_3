@@ -11,3 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Introduction 
 To begin working with Leaflet you will first need to download the package. Use install.packages("leaflet") download this package and load it onto your working script or console. 
+
+# Loading Data 
+The data we will be using for our examples is based off of a Tidy Tuesday Dataset on [Volcano Eruptions](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md)
+
