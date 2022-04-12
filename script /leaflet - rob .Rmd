@@ -6,21 +6,34 @@ output: html_document
 ---
 
 
+# Base Map
+Creating a standard basemap 
 
-Base Map
+```{r, warning=FALSE, message=FALSE}
 
+standard.basemap <- leaflet() %>% # leaflet 
+ addTiles()
 
-```{r, warning=FALSE,message=FALSE}
+standard.basemap
 
-longitude <- data$longitude
-latitude <- data$latitude
-volcano_name <- data$volcano_name
+```
 
-m <- leaflet() %>% # leaflet 
-addTiles() %>% # setup the default OpenStreetMap map tiles
-addMarkers(lng = longitude, lat = latitude, popup = "volcano") # add a single point layer
+Creating third-party basemaps
+```{r}
 
-m
+blackandwhite.basemap <- leaflet() %>% # leaflet 
+addProviderTiles(providers$Stamen.Toner)
 
+blackandwhite.basemap
+
+```
+
+Creating third-party basemaps
+```{r}
+
+cartoon.basemap <- leaflet() %>% # leaflet 
+addProviderTiles(providers$Esri.NatGeoWorldMap)
+
+cartoon.basemap
 ```
 
