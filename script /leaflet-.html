@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Ashlee" />
+<meta name="author" content="Ashlee, Margarita, Jocelyn, and Rob" />
 
 
 <title>Leaflet</title>
@@ -165,7 +165,7 @@ pre code {
 
 
 <h1 class="title toc-ignore">Leaflet</h1>
-<h4 class="author">Ashlee</h4>
+<h4 class="author">Ashlee, Margarita, Jocelyn, and Rob</h4>
 <h4 class="date">4/12/2022</h4>
 
 </div>
@@ -175,13 +175,13 @@ pre code {
 <h1>Introduction</h1>
 <p>To begin working with Leaflet you will first need to download the package. Use install.packages(“leaflet”) download this package and load it onto your working script or console.</p>
 </div>
-<div id="loading-libraries" class="section level1">
-<h1>Loading libraries</h1>
+<div id="libraries" class="section level1">
+<h1>Libraries</h1>
 <pre class="r"><code>library(leaflet)
 library(tidyverse)</code></pre>
 </div>
-<div id="loading-data" class="section level1">
-<h1>Loading Data</h1>
+<div id="data" class="section level1">
+<h1>Data</h1>
 <p>The data we will be using for our examples is based off of a Tidy Tuesday Dataset on <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md">Volcano Eruptions</a></p>
 <pre class="r"><code># Get the Data
 
@@ -190,6 +190,10 @@ eruptions &lt;- readr::read_csv(&#39;https://raw.githubusercontent.com/rfordatas
 events &lt;- readr::read_csv(&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/events.csv&#39;)
 tree_rings &lt;- readr::read_csv(&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/tree_rings.csv&#39;)
 sulfur &lt;- readr::read_csv(&#39;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/sulfur.csv&#39;)</code></pre>
+<p>Wrangling Data</p>
+<pre class="r"><code>data &lt;- full_join(volcano, eruptions) %&gt;% 
+  drop_na()</code></pre>
+<pre><code>## Joining, by = c(&quot;volcano_number&quot;, &quot;volcano_name&quot;, &quot;latitude&quot;, &quot;longitude&quot;)</code></pre>
 </div>
 
 

@@ -12,14 +12,14 @@ knitr::opts_chunk$set(echo = TRUE)
 # Introduction 
 To begin working with Leaflet you will first need to download the package. Use install.packages("leaflet") download this package and load it onto your working script or console. 
 
-# Loading libraries 
+# Libraries 
 ```{r, warning=FALSE, message=FALSE}
 library(leaflet)
 library(tidyverse)
 ```
 
 
-# Loading Data 
+# Data 
 The data we will be using for our examples is based off of a Tidy Tuesday Dataset on [Volcano Eruptions](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md)
 ```{r, warning=FALSE,message=FALSE}
 # Get the Data
@@ -34,6 +34,8 @@ sulfur <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tid
 Wrangling Data 
 ```{r}
 data <- full_join(volcano, eruptions) %>% 
+  filter(country == "United States"|
+           last_eruption_year == "1900") %>% 
   drop_na()
 ```
 
