@@ -9,3 +9,5 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# Introduction 
+To begin working with the Leaflet you will first need to download the package. Use install.packages("leaflet") download this pakcage and load it onto your workign script or console. 
