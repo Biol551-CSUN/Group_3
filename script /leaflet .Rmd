@@ -31,4 +31,9 @@ tree_rings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience
 sulfur <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/sulfur.csv')
 
 ```
+Wrangling Data 
+```{r}
+data <- full_join(volcano, eruptions) %>% 
+  drop_na()
+```
 
