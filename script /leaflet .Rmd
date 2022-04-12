@@ -1,6 +1,6 @@
 ---
 title: "Leaflet"
-author: "Ashlee"
+author: "Ashlee, Margarita, Jocelyn, and Rob"
 date: "4/12/2022"
 output: html_document
 ---
