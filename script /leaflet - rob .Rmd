@@ -5,37 +5,22 @@ date: "4/12/2022"
 output: html_document
 ---
 
-```{r setup, include=FALSE, warning=FALSE,message=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-# Introduction 
-To begin working with Leaflet you will first need to download the package. Use install.packages("leaflet") download this package and load it onto your working script or console. 
-
-# Loading libraries 
-```{r, warning=FALSE, message=FALSE}
-library(leaflet)
-library(tidyverse)
-```
 
 
-# Loading Data 
-The data we will be using for our examples is based off of a Tidy Tuesday Dataset on [Volcano Eruptions](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md)
+Base Map
+
+
 ```{r, warning=FALSE,message=FALSE}
-# Get the Data
 
-volcano <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/volcano.csv')
-eruptions <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/eruptions.csv')
-events <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/events.csv')
-tree_rings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/tree_rings.csv')
-sulfur <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/sulfur.csv')
+longitude <- data$longitude
+latitude <- data$latitude
+volcano_name <- data$volcano_name
 
-```
+m <- leaflet() %>% # leaflet 
+addTiles() %>% # setup the default OpenStreetMap map tiles
+addMarkers(lng = longitude, lat = latitude, popup = "volcano") # add a single point layer
 
-Wrangling Data 
-```{r}
-data <- full_join(volcano, eruptions) %>% 
-  drop_na() %>% 
-  filter()
+m
+
 ```
 
