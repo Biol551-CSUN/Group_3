@@ -35,7 +35,7 @@ Wrangling Data
 ```{r}
 data <- full_join(volcano, eruptions) %>% 
   filter(country == "United States"|
-           last_eruption_year == "1900") %>% 
+           last_eruption_year >= "1900") %>% 
   drop_na()
 ```
 
