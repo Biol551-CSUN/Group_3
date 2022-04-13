@@ -35,10 +35,11 @@ leaflet(data = volcano) %>%
   addMarkers(lng = 131.600, 
              lat = 34.500)
 
-leaflet(data = volcano) %>%
-  addTiles() %>%
-  addAwesomeMarkers(lng = 131.600, 
-                    lat = 34.500)
+# example using addAwesomeMarkers
+#leaflet(data = volcano) %>%
+#  addTiles() %>%
+#  addAwesomeMarkers(lng = 131.600, 
+#                    lat = 34.500)
 ```
 
 Interactive pop up labels can also be added to existing markers. Using the popup feature displays designated label when clicked on the marker.
@@ -88,5 +89,53 @@ leaflet(data = volcano) %>%
 
 If you have more than one icon or point, the icons function is used to add more than one icon onto your map.
 
+```{r}
+leafs <- icons(
+  iconUrl = "https://leafletjs.com/SlavaUkraini/examples/custom-icons/leaf-green.png",
+  iconWidth = 35, iconHeight = 95,
+  iconAnchorX = 20, iconAnchorY = 95,
+  shadowUrl = "https://leafletjs.com/SlavaUkraini/examples/custom-icons/leaf-shadow.png",
+  shadowWidth = 50, shadowHeight = 65,
+  shadowAnchorX = 5, shadowAnchorY = 65
+  )
+```
 
+```{r}
+leaflet(data = volcano) %>%
+  addTiles() %>%
+  addMarkers(lng = c(131.600, 140.281, 145.670, 145.030, 130.657),
+             lat = c(34.500, 37.647, 18.770, 20.420, 31.593),
+             icon = leafs)
+```
+
+# Customizable Icons with Awesome Icons
+
+Using the addAwesomeMarkers function, markers can be customized through their color and icons.
+
+View more icons [here](https://ionic.io/ionicons).
+
+```{r}
+volcano_icon <- awesomeIcons(
+  icon = "flame",
+  iconColor = "red",
+  library = "ion",
+  markerColor = "white"
+)
+```
+
+```{r}
+leaflet(data = volcano) %>%
+  addTiles() %>%
+  addAwesomeMarkers(lng = c(131.600, 140.281, 145.670, 145.030, 130.657),
+                    lat = c(34.500, 37.647, 18.770, 20.420, 31.593),
+                    icon = volcano_icon)
+```
+
+# Marker Clusters
+
+For many markers grouped together on a single map, the cluster function can be used to group together several markers into one.
+
+```{r}
+
+```
 
