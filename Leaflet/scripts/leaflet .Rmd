@@ -462,9 +462,4 @@ leaflet(cities) %>% #city data
 
 
 ```
-# Displaying a Place 
-
-```{r}
-
-```
 
