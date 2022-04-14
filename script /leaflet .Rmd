@@ -86,22 +86,17 @@ Tile webmaps join many map images together.
  basemap
 
 ```
-Adding Opacity
+
+#Displaying a Place 
 
 ```{r}
-<<<<<<< HEAD
 
-leaflet() %>%
-  addProviderTiles("OpenStreetMap", layerId = "base") %>%
-  addRasterImage(r, layerId = "rast") %>%
-  addAwesomeMarkers(lng = -2.79545, lat = 54.04321,
-                    label = "Hospital", layerId = "hospital") %>%
-  addOpacityControls()
-=======
->>>>>>> cb7e73f6d24922faaf3a25345d3e021199cd66b9
+leaflet() %>% 
+  addTiles() %>% 
+  setView(-34.2410, 118.5277, zoom = 17) %>% #set view
+  addPopups(-93.65, 42.0285, 'Here is <b> California State University, Northridge</b>, CSUN') # adding label
 
 ```
-
 
 Adding Markers
 ```{r}
@@ -378,4 +373,27 @@ leaflet(data) %>%
 ```
 
 
+
+# Adding Legends and Shading Points
+```{r}
+
+cities <- read.csv(textConnection("
+City,Lat,Long,Pop
+Boston,42.360,-71.058,645966
+New York City,40.712,-74.005,8406000
+Philadelphia,39.950,-75.166,155500
+Pittsburgh,40.439,-79.976,305841
+")) # creating a simple data set of population 
+
+qpal <- colorQuantile("YlOrRd", cities$Pop, n = 4) #creating population density colors
+
+leaflet(cities) %>% #city data 
+  addTiles() %>%
+  addCircles(lng = ~Long, lat = ~Lat, weight = 1,
+    popup = ~City, radius = 20000, #radius of points 
+    color = ~qpal(Pop), fillOpacity = 1) %>% #opacity for points
+  addLegend("bottomright", pal = qpal, values = ~Pop, #legend using color vlaues
+            title = "Pop", opacity = 1) 
+
+```
 
