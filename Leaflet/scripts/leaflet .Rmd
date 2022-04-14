@@ -112,20 +112,6 @@ cartoon.basemap
 
 ```
 
-#Displaying a Place 
-
-```{r}
-
-m <- leaflet() %>% 
-  addTiles() %>% 
-  setView(-34.2410, 118.5277, zoom = 17) %>% #set view
-  addPopups(-93.65, 42.0285, 'Here is <b> California State University, Northridge</b>, CSUN') # adding label
-
-m
-
-```
-
-
 ## Adding Markers
 
 ```{r}
@@ -422,6 +408,11 @@ leaflet(cities) %>% #city data
     color = ~qpal(Pop), fillOpacity = 1) %>% #opacity for points
   addLegend("bottomright", pal = qpal, values = ~Pop, #legend using color vlaues
             title = "Pop", opacity = 1) 
+
+
+```
+# Displaying a Place 
+```{r}
 
 ```
 
