@@ -67,12 +67,19 @@ standard.basemap
 
 Creating third-party basemaps can be done by searching for different colors and styles of map tiles. 
 ```{r}
-
 blackandwhite.basemap <- standard.basemap %>% # leaflet 
 addProviderTiles(providers$Stamen.Toner)
 
+blackandwhite.basemap
+
+```
+
+
+```{r}
 cartoon.basemap <- standard.basemap %>% # leaflet 
 addProviderTiles(providers$CartoDB.Positron)
+
+cartoon.basemap 
 
 ```
 
@@ -94,10 +101,12 @@ addProviderTiles(providers$CartoDB.Positron)
 
 ```{r}
 
-leaflet() %>% 
+m <- leaflet() %>% 
   addTiles() %>% 
   setView(-34.2410, 118.5277, zoom = 17) %>% #set view
   addPopups(-93.65, 42.0285, 'Here is <b> California State University, Northridge</b>, CSUN') # adding label
+
+m
 
 ```
 
