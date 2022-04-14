@@ -4,6 +4,52 @@ author: "Ashlee, Margarita, Jocelyn, and Rob"
 date: "4/12/2022"
 output: html_document
 ---
+---
+title: "Leaflet"
+author: "Ashlee, Margarita, Jocelyn, and Rob"
+date: "4/12/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE, warning=FALSE,message=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction 
+To begin working with Leaflet you will first need to download the package. Use install.packages("leaflet") download this package and load it onto your working script or console.
+Leaflet is an open source JavaScript library used to build web mapping applications. It is designed for simplicity, performance and usability. 
+
+# Libraries 
+```{r, warning=FALSE, message=FALSE}
+library(leaflet)
+library(tidyverse)
+library(dplyr)
+```
+
+
+# Data 
+The data we will be using for our examples is based off of a Tidy Tuesday Dataset on [Volcano Eruptions](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md)
+```{r, warning=FALSE,message=FALSE}
+# Get the Data
+
+volcano <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/volcano.csv')
+eruptions <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/eruptions.csv')
+events <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/events.csv')
+tree_rings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/tree_rings.csv')
+sulfur <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/sulfur.csv')
+
+```
+Wrangling Data 
+```{r}
+data <- full_join(volcano, eruptions) %>% 
+  filter(last_eruption_year >= "1900") %>% 
+  select(-major_rock_1, -major_rock_2, -major_rock_3, -major_rock_4, -major_rock_5,
+         -minor_rock_1, -minor_rock_2, -minor_rock_3, -minor_rock_4, -minor_rock_5,
+         -population_within_5_km, -population_within_10_km, -population_within_30_km, -population_within_100_km,
+         -vei) %>% 
+  drop_na()
+```
+
 
 
 # Base Map
@@ -13,7 +59,7 @@ Creating a standard basemap
 
 standard.basemap <- leaflet() %>% # leaflet 
  addTiles() %>% 
-setView(lat= 37.5, lng=-95.5, zoom=3)
+setView(lat= 37.5, lng=-95.5, zoom=1)
 
 standard.basemap
 
@@ -30,34 +76,34 @@ addProviderTiles(providers$CartoDB.Positron)
 
 ```
 
-Combining Tile Layers 
-
+Combining Tile Layers can be done using the pipe function and setting tile opacity. 
 
 ```{r}
 
- basemap <- standard.basemap %>% 
-  addProviderTiles(providers$Stamen.Watercolor) %>%
+ basemap <- cartoon.basemap %>%
   addProviderTiles(providers$Stamen.TonerLines,
-    options = providerTileOptions(opacity = 0.35)) %>%
-  addProviderTiles(providers$Stamen.TonerLabels)
+    options = providerTileOptions(opacity = 0.45)) #change opacity
 
  basemap
 
-
 ```
 
-Adding Markers
+#Adding Markers to a Map 
 
 ```{r}
 
-longitude <- data$longitude
-latitude <- data$latitude
-volcanonames <- data$volcano_name
+longitude <- data$longitude #setting longitude as a column
+latitude <- data$latitude  #setting latitude as a column
+volcanonames <- data$volcano_name #setting volcano names
+population <- 
 
 volcanomap <- basemap %>% 
-addCircleMarkers(lng = longitude, lat = latitude, popup = volcanonames, radius=3, color="#ffffd4", stroke=FALSE, fillOpacity=1) # add a single point layer
+addCircleMarkers(lng = longitude, lat = latitude, popup = volcanonames, radius=3, color="#ffffd14", stroke=FALSE, fillOpacity=1) # add a single point layer
 
 volcanomap
 
 ```
+
+
+
 
