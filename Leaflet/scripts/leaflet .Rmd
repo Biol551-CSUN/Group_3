@@ -2,7 +2,11 @@
 title: "Leaflet"
 author: "Ashlee, Margarita, Jocelyn, and Rob"
 date: "4/12/2022"
-output: html_document
+output: 
+ html_document:
+   theme: cosmo
+   toc: TRUE
+   toc_float: TRUE
 ---
 
 ```{r setup, include=FALSE, warning=FALSE, message=FALSE}
@@ -46,7 +50,7 @@ data <- full_join(volcano, eruptions) %>%
 
 
 
-# Base Map
+# Base Maps
 Creating a standard basemap 
 
 ```{r, warning=FALSE, message=FALSE}
@@ -59,6 +63,8 @@ standard.basemap
 
 ```
 
+## Third-party basemaps
+
 Creating third-party basemaps can be done by searching for different colors and styles of map tiles. 
 ```{r}
 
@@ -70,7 +76,7 @@ addProviderTiles(providers$CartoDB.Positron)
 
 ```
 
-Combining Tile Layers 
+## Combining Tile Layers 
 
 ```{r}
 
@@ -84,7 +90,7 @@ Combining Tile Layers
 
 ```
 
-Adding Markers
+## Adding Markers
 
 ```{r}
 
@@ -99,7 +105,7 @@ volcanomap
 
 ```
 
-# Adding markers to maps
+# Markers
 
 First we start with the base function to create a map.
 ```{r}
@@ -146,7 +152,7 @@ leaflet(data) %>%
              label = "Toya volcano") #label name
 ```
 
-# Customizing marker icons
+## Customizing marker icons
 
 Markers can be customized in any way, using any icon, image, or color.
 
@@ -200,7 +206,7 @@ leaflet(data) %>%
              icon = leafs) #name for multiple icons code
 ```
 
-# Customizable Icons with Awesome Icons
+## Customizable Icons with Awesome Icons
 
 Using the addAwesomeMarkers() function, markers can be customized through their color and icons.
 
@@ -223,7 +229,7 @@ leaflet(data) %>%
                     icon = volcano_icon) #name for icon function
 ```
 
-# Marker Clusters
+## Marker Clusters
 
 For many markers grouped together on a single map, the clusterOptions function can be used to group together several markers into one.
 
@@ -241,7 +247,7 @@ leaflet(data) %>%
              clusterOptions = markerClusterOptions()) #code for cluster option
 ```
 
-# Circle Markers
+## Circle Markers
 
 Instead of the standard bubble markers, you can opt for circle markers.
 
@@ -276,12 +282,12 @@ leaflet(data) %>%
              fillColor = "transparent")
 ```
 
-# Circles vrs Circle Markers
+## Circles vrs Circle Markers
 * Circles are similar to circle markers.
 * Circles have their radii specified in meters. 
 * Circle markers are specified in pixels.
 
-# Observed circles in two different points
+## Observed circles in two different points
 ```{r}
 leaflet(data) %>% 
   addTiles() %>% #add default map
@@ -290,7 +296,7 @@ leaflet(data) %>%
              lat = ~latitude)
 ```
 
-# Circles 
+## Circles 
 ```{r, warning=FALSE}
 leaflet(data) %>% 
   addTiles() %>% #add default map
@@ -301,7 +307,7 @@ leaflet(data) %>%
              fillColor = "transparent") #fill the inside of the circle with a transparent color
 ```
 
-# Circle Markers in two different points
+## Circle Markers in two different points
 ```{r}
 leaflet(data) %>% 
   addTiles() %>% #add default map
@@ -311,7 +317,7 @@ leaflet(data) %>%
              fillColor = "transparent") #fill the inside of the circle with a transparent color
 ```
 
-# Circles in one specific point
+## Circles in one specific point
 ```{r}
 leaflet(data) %>%
    addTiles() %>% #add default map
@@ -322,7 +328,7 @@ leaflet(data) %>%
 ```
 
 
-# Polylines
+## Polylines
 ```{r}
 leaflet(data) %>% 
   addTiles() %>% #add default map
@@ -332,7 +338,7 @@ leaflet(data) %>%
 ```
 
 
-# Polygons
+## Polygons
 ```{r}
 leaflet(data) %>% 
   addTiles() %>% #add default map
@@ -341,7 +347,7 @@ leaflet(data) %>%
     c(19.475, 19.605, 19.421))
 ```
 
-# Rectangles
+## Rectangles
 ```{r}
 leaflet(data) %>% 
   addTiles() %>% #add default map
@@ -350,7 +356,7 @@ leaflet(data) %>%
 ```
 
 
-# Rectangle inside of a Mini Map
+## Rectangle inside of a Mini Map
 ```{r}
 leaflet(data) %>% 
   addTiles() %>% #add default map
