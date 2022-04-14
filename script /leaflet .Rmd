@@ -109,9 +109,9 @@ leaflet() %>%
 
 Then we can pin point on any given location using lat and long data, here is an example using Toya volcano in Japan. 
 
-Icon markers can be added using the addMarkers or addAwesomeMarkers function.
+Icon markers can be added using the addMarkers() or addAwesomeMarkers() function.
 
-Both functions work the same but differ in that the addAwesomeMarkers function allows you to use additional custom colors or icons from Font Awesome, Bootstrap Glyphicons, and Ion icons icon libraries.
+Both functions work the same but differ in that the addAwesomeMarkers function allows you to use additional custom colors or icons from [Font Awesome](https://fontawesome.com/icons), [Bootstrap Glyphicons](https://getbootstrap.com/docs/5.1/components/accordion/), and [Ion icons](https://ionic.io/ionicons) icon libraries.
 
 ```{r}
 leaflet(data) %>%
@@ -126,7 +126,7 @@ leaflet(data) %>%
 #                    lat = 34.500)
 ```
 
-Interactive pop up labels can also be added to existing markers. Using the popup feature displays designated label when clicked on the marker.
+Interactive pop up labels can also be added to existing markers. Using the popup feature displays custom label when clicked on the marker.
 
 ```{r}
 leaflet(data) %>%
@@ -136,7 +136,7 @@ leaflet(data) %>%
              popup = "Toya volcano") #label name
 ```
 
-Using the label option adds a hover feature to your label.
+Alternately, using the label option adds a hover feature to your label.
 
 ```{r}
 leaflet(data) %>%
@@ -173,11 +173,12 @@ leaflet(data) %>%
              icon = LeafIcon) #name for icon code
 ```
 
-If you have more than one icon or point, the icons function is used to add more than one icon onto your map.
+If you have more than one icon or point, the icons() function is used to add more than one icon onto your map.
 
 ```{r}
 leafs <- icons(
-  iconUrl = "https://leafletjs.com/SlavaUkraini/examples/custom-icons/leaf-green.png", #leaf icon
+  iconUrl = c("https://leafletjs.com/SlavaUkraini/examples/custom-icons/leaf-green.png", #green leaf icon
+              "https://leafletjs.com/SlavaUkraini/examples/custom-icons/leaf-red.png"), #red leaf icon
   iconWidth = 35, iconHeight = 95, #icon dimensions
   iconAnchorX = 20, iconAnchorY = 95, #icon position dimensions
   shadowUrl = "https://leafletjs.com/SlavaUkraini/examples/custom-icons/leaf-shadow.png", #shadow icon
@@ -201,9 +202,9 @@ leaflet(data) %>%
 
 # Customizable Icons with Awesome Icons
 
-Using the addAwesomeMarkers function, markers can be customized through their color and icons.
+Using the addAwesomeMarkers() function, markers can be customized through their color and icons.
 
-View more icons [here](https://ionic.io/ionicons).
+View more ion icons [here](https://ionic.io/ionicons).
 
 ```{r}
 volcano_icon <- awesomeIcons(
@@ -224,7 +225,7 @@ leaflet(data) %>%
 
 # Marker Clusters
 
-For many markers grouped together on a single map, the cluster function can be used to group together several markers into one.
+For many markers grouped together on a single map, the clusterOptions function can be used to group together several markers into one.
 
 ```{r}
 # 10 long and lat values for volcanoes in japan
@@ -251,7 +252,7 @@ leaflet(data) %>%
                    lat = latitudevals) #latitude function
 ```
 
-Circle markers can be customized by their color and opacity among others. 
+Circle markers can be customized by their color, opacity, etc. 
 
 ```{r}
 colpal <- c("#FB7110", "#4D1104") #color palette function
