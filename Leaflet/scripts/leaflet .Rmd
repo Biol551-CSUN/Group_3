@@ -97,6 +97,16 @@ addProviderTiles(providers$CartoDB.Positron)
 cartoon.basemap 
 
 ```
+# Displaying a Place
+```{r}
+
+CSUN <- leaflet() %>%
+    addTiles() %>%
+    setView(-118.5277, 34.2410,  zoom = 15) %>% #set view
+    addPopups(-118.5277, 34.2410, 'Here is <b> California State University, Northridge</b>, CSUN') # adding label
+CSUN
+```
+
 
 ## Combining Tile Layers 
 
