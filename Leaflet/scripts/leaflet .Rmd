@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Introduction 
-To begin working with Leaflet you will first need to download the package. Use install.packages("leaflet") download this package and load it onto your working script or console.
+To begin working with Leaflet you will first need to download the package. Use install.packages("leaflet") to download this package and load it onto your working script or console.
 Leaflet is an open source JavaScript library used to build web mapping applications. It is designed for simplicity, performance and usability. 
 
 # Libraries 
