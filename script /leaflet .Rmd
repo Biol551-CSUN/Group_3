@@ -102,7 +102,7 @@ volcanomap
 # Adding markers to maps
 
 First we start with the base function to create a map.
-```{r}
+```{r marker_basemap}
 leaflet() %>%
   addTiles()
 ```
@@ -113,7 +113,7 @@ Icon markers can be added using the addMarkers() or addAwesomeMarkers() function
 
 Both functions work the same but differ in that the addAwesomeMarkers function allows you to use additional custom colors or icons from [Font Awesome](https://fontawesome.com/icons), [Bootstrap Glyphicons](https://getbootstrap.com/docs/5.1/components/accordion/), and [Ion icons](https://ionic.io/ionicons) icon libraries.
 
-```{r}
+```{r first_marker}
 leaflet(data) %>%
   addTiles() %>%
   addMarkers(lng = 140.839, #longitude value
@@ -128,7 +128,7 @@ leaflet(data) %>%
 
 Interactive pop up labels can also be added to existing markers. Using the popup feature displays custom label when clicked on the marker.
 
-```{r}
+```{r popup_marker}
 leaflet(data) %>%
   addTiles() %>%
   addMarkers(lng = 140.8390, #longitude value
@@ -138,7 +138,7 @@ leaflet(data) %>%
 
 Alternately, using the label option adds a hover feature to your label.
 
-```{r}
+```{r label_marker}
 leaflet(data) %>%
   addTiles() %>%
   addMarkers(lng = 140.839, #longitude value
@@ -165,7 +165,7 @@ LeafIcon <- makeIcon(
   )
 ```
 
-```{r}
+```{r LeafIcon}
 leaflet(data) %>%
   addTiles() %>%
   addMarkers(lng = 140.839, #longitude value
@@ -192,7 +192,7 @@ longitudeval <- c(140.281, 145.030, 130.657, 144.013, 140.799) #5 longitude valu
 latitudeval <- c(37.647, 20.420, 31.593, 43.384, 39.761) #5 latitude values
 ```
 
-```{r}
+```{r Leafs}
 leaflet(data) %>%
   addTiles() %>%
   addMarkers(lng = longitudeval, #longitude function
@@ -215,7 +215,7 @@ volcano_icon <- awesomeIcons(
 )
 ```
 
-```{r}
+```{r volcano_icon}
 leaflet(data) %>%
   addTiles() %>%
   addAwesomeMarkers(lng = longitudeval, #longitude function
@@ -233,7 +233,7 @@ longitudevals <- c(140.281, 145.030, 130.657, 144.013, 140.799, 145.670, 138.523
 latitudevals <- c(37.647, 20.420, 31.593, 43.384, 39.761, 16.350, 36.406, 32.884, 37.735, 44.353)
 ```
 
-```{r}
+```{r cluster}
 leaflet(data) %>% 
   addTiles() %>% 
   addMarkers(lng = longitudevals, #longitude function
@@ -245,7 +245,7 @@ leaflet(data) %>%
 
 Instead of the standard bubble markers, you can opt for circle markers.
 
-```{r}
+```{r circle_markers}
 leaflet(data) %>% 
   addTiles() %>%
   addCircleMarkers(lng = longitudevals, #simple circle marker, longitude function
@@ -254,7 +254,7 @@ leaflet(data) %>%
 
 Circle markers can be customized by their color, opacity, etc. 
 
-```{r}
+```{r aes_circle_markers}
 colpal <- c("#FB7110", "#4D1104") #color palette function
 
 leaflet(data) %>% 

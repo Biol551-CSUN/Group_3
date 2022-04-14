@@ -1,0 +1,63 @@
+---
+title: "Leaflet"
+author: "Ashlee, Margarita, Jocelyn, and Rob"
+date: "4/12/2022"
+output: html_document
+---
+
+
+# Base Map
+Creating a standard basemap 
+
+```{r, warning=FALSE, message=FALSE}
+
+standard.basemap <- leaflet() %>% # leaflet 
+ addTiles() %>% 
+setView(lat= 37.5, lng=-95.5, zoom=3)
+
+standard.basemap
+
+```
+
+Creating third-party basemaps can be done by searching for different colors and styles of map tiles. 
+```{r}
+
+blackandwhite.basemap <- standard.basemap %>% # leaflet 
+addProviderTiles(providers$Stamen.Toner)
+
+cartoon.basemap <- standard.basemap %>% # leaflet 
+addProviderTiles(providers$CartoDB.Positron)
+
+```
+
+Combining Tile Layers 
+
+
+```{r}
+
+ basemap <- standard.basemap %>% 
+  addProviderTiles(providers$Stamen.Watercolor) %>%
+  addProviderTiles(providers$Stamen.TonerLines,
+    options = providerTileOptions(opacity = 0.35)) %>%
+  addProviderTiles(providers$Stamen.TonerLabels)
+
+ basemap
+
+
+```
+
+Adding Markers
+
+```{r}
+
+longitude <- data$longitude
+latitude <- data$latitude
+volcanonames <- data$volcano_name
+
+volcanomap <- basemap %>% 
+addCircleMarkers(lng = longitude, lat = latitude, popup = volcanonames, radius=3, color="#ffffd4", stroke=FALSE, fillOpacity=1) # add a single point layer
+
+volcanomap
+
+```
+
