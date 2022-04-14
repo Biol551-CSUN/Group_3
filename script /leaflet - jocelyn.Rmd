@@ -168,8 +168,7 @@ leaflet(data) %>%
 Circle markers can be customized by their color and opacity among others. 
 
 ```{r}
-# Create a palette that maps factor levels to colors
-colpal <- c("#FB7110", "#4D1104")
+colpal <- c("#FB7110", "#4D1104") #color palette function
 
 leaflet(data) %>% 
   addTiles() %>%
