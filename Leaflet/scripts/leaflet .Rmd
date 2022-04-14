@@ -45,14 +45,13 @@ The data we will be using for our examples is based off of a Tidy Tuesday Datase
 ```{r, warning=FALSE,message=FALSE}
 # Get the Data
 
-volcano <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/volcano.csv') # Volcano #, name, type, last eruption year, country, region, subregion, lat, long, 
+volcano <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/volcano.csv') # Volcano #, name, type, last eruption year, country, region, subregion, lat, long
 
 eruptions <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/eruptions.csv') # Volcano #, name, lat, long 
 
 volcano <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/volcano.csv') # Volcano #, name, type, last eruption year, country, region, subregion, lat, long
 
 eruptions <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/eruptions.csv')  # Volcano #, name, lat, long
-
 
 events <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/events.csv')
 
@@ -61,8 +60,8 @@ tree_rings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience
 sulfur <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/sulfur.csv')
 ```
 
+## Wrangling Data 
 
-Wrangling Data 
 ```{r}
 data <- full_join(volcano, eruptions) %>% ## Joining both data sets 
   filter(last_eruption_year >= "1900") %>% # Selecting eruptions after the year 1900 
