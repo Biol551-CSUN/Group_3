@@ -5,7 +5,7 @@ date: "4/12/2022"
 output: html_document
 ---
 
-```{r setup, include=FALSE, warning=FALSE,message=FALSE}
+```{r setup, include=FALSE, warning=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -265,4 +265,100 @@ leaflet(data) %>%
                    stroke = FALSE, #circle border
                    fillOpacity = 0.5) #circle opacity
 ```
+
+# Lines and Shapes
+## Circles
+```{r}
+leaflet(data) %>%
+  addTiles() %>% #add default map
+  addCircles(lng = ~longitude, #add circles to the map using lng and lat
+             lat = ~latitude,
+             fillColor = "transparent")
+```
+
+# Circles vrs Circle Markers
+* Circles are similar to circle markers.
+* Circles have their radii specified in meters. 
+* Circle markers are specified in pixels.
+
+# Observed circles in two different points
+```{r}
+leaflet(data) %>% 
+  addTiles() %>% #add default map
+   setView(-86.702, 12.506, zoom = 12) %>% #add specific view of the map in certain area
+  addCircles(lng = ~longitude, #add circles to the map using lng and lat
+             lat = ~latitude)
+```
+
+# Circles 
+```{r, warning=FALSE}
+leaflet(data) %>% 
+  addTiles() %>% #add default map
+   setView(-86.702, 12.506, zoom = 12) %>% #add specific view of the map in certain area
+  addCircles(lng = ~longitude, #add circles to the map using lng and lat
+             lat = ~latitude,
+             radius = ~sqrt(elevation) * 26, #change size in the radius of the circles
+             fillColor = "transparent") #fill the inside of the circle with a transparent color
+```
+
+# Circle Markers in two different points
+```{r}
+leaflet(data) %>% 
+  addTiles() %>% #add default map
+   setView(-86.702, 12.506, zoom = 12) %>% #add specific view of the map in certain area
+  addCircleMarkers(lng = ~longitude, #add circle markers
+             lat = ~latitude,
+             fillColor = "transparent") #fill the inside of the circle with a transparent color
+```
+
+# Circles in one specific point
+```{r}
+leaflet(data) %>%
+   addTiles() %>% #add default map
+  setView(-86.688, 12.495, zoom = 14) %>% #add specific view of the map in certain area
+  addCircles(-86.688, 12.495, #add circles
+             radius = 500, #add radius or size of the circle
+             color = "blue") #add color
+```
+
+
+# Polylines
+```{r}
+leaflet(data) %>% 
+  addTiles() %>% #add default map
+  fitBounds(-155.908, 19.475, -155.287, 19.421) %>% #set the specific points need it for the polylines
+  addPolylines(c(-155.908, -155.589, -155.287), #add polylines using 3 values for longitude and 3 for latitude
+    c(19.475, 19.605, 19.421))
+```
+
+
+# Polygons
+```{r}
+leaflet(data) %>% 
+  addTiles() %>% #add default map
+  fitBounds(-155.908, 19.475, -155.287, 19.421) %>% #set the specific points need it for the polygons
+  addPolygons(c(-155.908, -155.589, -155.287), #add polygons using three points in longitude and three in latitude
+    c(19.475, 19.605, 19.421))
+```
+
+
+# Rectangles
+```{r}
+leaflet(data) %>% 
+  addTiles() %>% #add default map
+  fitBounds(-155.608, 19.475, -155.287, 19.421) %>% #set the specific points need it for the rectangles
+  addRectangles(-155.608, 19.475, -155.287, 19.421) #add rectangles
+```
+
+
+# Rectangle inside of a Mini Map
+```{r}
+leaflet(data) %>% 
+  addTiles() %>% #add default map
+  fitBounds(-155.608, 19.475, -155.287, 19.421) %>% #set the specific points need it for the rectangles
+  addRectangles(-155.608, 19.475, -155.287, 19.421) %>% #add rectangles using 2 values for longitude and 2 for latitude
+  addMiniMap() #add a mini map where you can observe the rectangle moving in the mini map
+```
+
+
 
