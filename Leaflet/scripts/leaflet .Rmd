@@ -17,6 +17,21 @@ knitr::opts_chunk$set(echo = TRUE)
 To begin working with Leaflet you will first need to download the package. Use install.packages("leaflet") to download this package and load it onto your working script or console.
 Leaflet is an open source JavaScript library used to build web mapping applications. It is designed for simplicity, performance and usability. 
 
+* Interactive panning/zooming
+* Compose maps using arbitrary combinations of:
+  * Map tiles
+  * Markers
+  * Polygons
+  * Lines
+  * Popups
+  * GeoJSON
+* Create maps right from the R console or RStudio
+* Embed maps in knitr/R Markdown documents and Shiny apps
+* Easily render spatial objects from the sp or sf packages, or data frames with latitude/longitude columns
+* Use map bounds and mouse events to drive Shiny logic
+* Display maps in non spherical mercator projections
+* Augment map features using chosen plugins from leaflet plugins repository
+
 # Libraries 
 ```{r, warning=FALSE, message=FALSE}
 library(leaflet)
