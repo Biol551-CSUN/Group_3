@@ -52,6 +52,9 @@ data <- full_join(volcano, eruptions) %>%
 
 
 
+
+
+
 # Base Map
 Creating a standard basemap 
 
