@@ -9,11 +9,11 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-# Introduction 
-To begin working with Leaflet you will first need to download the package. Use install.packages("leaflet") download this package and load it onto your working script or console.
+# Introduction to Leaflet 
+To begin working with Leaflet you will first need to download the package. Use install.packages("leaflet") to download this package and load it onto your working script or console.
 Leaflet is an open source JavaScript library used to build web mapping applications. It is designed for simplicity, performance and usability. 
 
-# Libraries 
+# Libraries used for leaflet 
 ```{r, warning=FALSE, message=FALSE}
 library(leaflet)
 library(tidyverse)
@@ -33,6 +33,7 @@ tree_rings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience
 sulfur <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/sulfur.csv')
 
 ```
+
 Wrangling Data 
 ```{r}
 data <- full_join(volcano, eruptions) %>% 
@@ -71,7 +72,7 @@ addProviderTiles(providers$CartoDB.Positron)
 ```
 
 Combining Tile Layers 
-
+Tile webmaps join many map images together. 
 ```{r}
 
  basemap <- standard.basemap %>% 
