@@ -1,2 +1,15 @@
 # Group 3: Leaflet
-Ashlee Ochoa, Jocelyn Martinez Rico, Margarita Alfaro Hernandez, Robert Dellinger
+
+Description: The leaflet package is an open-source Javascript library that allows you to create customizable and interactive maps.
+
+---
+
+## Group members and contributions:
+
+Ashlee Ochoa: Intro and data wrangling, 
+
+Jocelyn Martinez Rico: Markers
+
+Margarita Alfaro Hernandez: Lines and shapes
+
+Robert Dellinger: Base maps

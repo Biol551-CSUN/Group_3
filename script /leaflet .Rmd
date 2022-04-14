@@ -33,6 +33,7 @@ tree_rings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience
 sulfur <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/sulfur.csv')
 
 ```
+
 Wrangling Data 
 ```{r}
 data <- full_join(volcano, eruptions) %>% 
@@ -47,7 +48,7 @@ data <- full_join(volcano, eruptions) %>%
 
 
 # Base Map
-Creating a standard basemap 
+Creating a standard basemap may be done by using coordinates, map zoom, and adding tiles. 
 
 ```{r, warning=FALSE, message=FALSE}
 
@@ -63,10 +64,10 @@ Creating third-party basemaps can be done by searching for different colors and 
 ```{r}
 
 blackandwhite.basemap <- standard.basemap %>% # leaflet 
-addProviderTiles(providers$Stamen.Toner)
+addProviderTiles(providers$Stamen.Toner) #black and white base map
 
 cartoon.basemap <- standard.basemap %>% # leaflet 
-addProviderTiles(providers$CartoDB.Positron)
+addProviderTiles(providers$CartoDB.Positron) #creating a cartoon basemap 
 
 ```
 
@@ -74,11 +75,12 @@ Combining Tile Layers
 
 ```{r}
 
- basemap <- standard.basemap %>% 
-  addProviderTiles(providers$Stamen.Watercolor) %>%
+ basemap <- standard.basemap %>% #basemap 
+  addProviderTiles(providers$Stamen.Watercolor) %>% #layering the water color map 
   addProviderTiles(providers$Stamen.TonerLines,
-    options = providerTileOptions(opacity = 0.35)) %>% #change opacity
+    options = providerTileOptions(opacity = 0.35)) %>% #changing the opacity settings 
   addProviderTiles(providers$Stamen.TonerLabels)
+#adding labels 
 
  basemap
 
@@ -88,11 +90,11 @@ Adding Markers
 
 ```{r}
 
-longitude <- data$longitude
-latitude <- data$latitude
-volcanonames <- data$volcano_name
+longitude <- data$longitude #extracting longitude
+latitude <- data$latitude #extracting latitude
+volcanonames <- data$volcano_name #extracting names
 
-volcanomap <- basemap %>% 
+volcanomap <- basemap %>% #creating a base map with markers
 addCircleMarkers(lng = longitude, lat = latitude, popup = volcanonames, radius=3, color="#ffffd14", stroke=FALSE, fillOpacity=1) # add a single point layer
 
 volcanomap
