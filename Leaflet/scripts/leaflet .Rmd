@@ -2,8 +2,11 @@
 title: "Leaflet"
 author: "Ashlee, Margarita, Jocelyn, and Rob"
 date: "4/12/2022"
-<<<<<<< HEAD
-output: html_document
+output:
+  html_document:
+   theme: cosmo
+   toc: TRUE
+   toc_float: TRUE
 ---
 
 ```{r setup, include=FALSE, warning=FALSE,message=FALSE}
@@ -11,23 +14,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Introduction to Leaflet 
-To begin working with Leaflet you will first need to download the package. Use install.packages("leaflet") to download this package and load it onto your working script or console.
-Leaflet is an open source JavaScript library used to build web mapping applications. It is designed for simplicity, performance and usability. 
-
-# Libraries used for leaflet 
-=======
-output: 
- html_document:
-   theme: cosmo
-   toc: TRUE
-   toc_float: TRUE
----
-
-```{r setup, include=FALSE, warning=FALSE, message=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-# Introduction 
 To begin working with Leaflet you will first need to download the package. Use install.packages("leaflet") to download this package and load it onto your working script or console.
 Leaflet is an open source JavaScript library used to build web mapping applications. It is designed for simplicity, performance and usability. 
 
@@ -47,36 +33,34 @@ Leaflet is an open source JavaScript library used to build web mapping applicati
 * Augment map features using chosen plugins from leaflet plugins repository
 
 # Libraries 
->>>>>>> 71b7f7e87e1645c62f6e6bb282c89c878e311846
 ```{r, warning=FALSE, message=FALSE}
 library(leaflet)
 library(tidyverse)
 library(dplyr)
-<<<<<<< HEAD
-library(leaflet.multiopacity)
-=======
->>>>>>> 71b7f7e87e1645c62f6e6bb282c89c878e311846
 ```
-
 
 # Data 
 The data we will be using for our examples is based off of a Tidy Tuesday Dataset on [Volcano Eruptions](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md)
+
 ```{r, warning=FALSE,message=FALSE}
 # Get the Data
 
-<<<<<<< HEAD
 volcano <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/volcano.csv') # Volcano #, name, type, last eruption year, country, region, subregion, lat, long, 
-eruptions <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/eruptions.csv') # Volcano #, name, lat, long 
-=======
-volcano <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/volcano.csv') # Volcano #, name, type, last eruption year, country, region, subregion, lat, long
-eruptions <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/eruptions.csv')  # Volcano #, name, lat, long
->>>>>>> 71b7f7e87e1645c62f6e6bb282c89c878e311846
-events <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/events.csv')
-tree_rings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/tree_rings.csv')
-sulfur <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/sulfur.csv')
 
+eruptions <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/eruptions.csv') # Volcano #, name, lat, long 
+
+volcano <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/volcano.csv') # Volcano #, name, type, last eruption year, country, region, subregion, lat, long
+
+eruptions <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/eruptions.csv')  # Volcano #, name, lat, long
+
+
+events <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/events.csv')
+
+tree_rings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/tree_rings.csv')
+
+sulfur <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/sulfur.csv')
 ```
-<<<<<<< HEAD
+
 
 Wrangling Data 
 ```{r}
@@ -85,29 +69,13 @@ data <- full_join(volcano, eruptions) %>% ## Joining both data sets
   select(-major_rock_1, -major_rock_2, -major_rock_3, -major_rock_4, -major_rock_5,
          -minor_rock_1, -minor_rock_2, -minor_rock_3, -minor_rock_4, -minor_rock_5,
          -population_within_5_km, -population_within_10_km, -population_within_30_km, -population_within_100_km,
-         -vei) %>% # removing unnecessary data 
-=======
-Wrangling Data 
-```{r}
-data <- full_join(volcano, eruptions) %>% ## Joining both data sets 
-  filter(last_eruption_year >= "1900") %>% # Selecting eruptions after the year 1900
-  select(-major_rock_1, -major_rock_2, -major_rock_3, -major_rock_4, -major_rock_5,
-         -minor_rock_1, -minor_rock_2, -minor_rock_3, -minor_rock_4, -minor_rock_5,
-         -population_within_5_km, -population_within_10_km, -population_within_30_km, -population_within_100_km,
          -vei) %>% # removing unnecessary data
->>>>>>> 71b7f7e87e1645c62f6e6bb282c89c878e311846
   drop_na() # removing nas 
 ```
 
 
-
-<<<<<<< HEAD
-# Base Map
-Creating a standard basemap may be done by using coordinates, map zoom, and adding tiles. 
-=======
 # Base Maps
 Creating a standard basemap 
->>>>>>> 71b7f7e87e1645c62f6e6bb282c89c878e311846
 
 ```{r, warning=FALSE, message=FALSE}
 
@@ -119,7 +87,6 @@ standard.basemap
 
 ```
 
-<<<<<<< HEAD
 Creating third-party basemaps can be done by searching for different colors and styles of map tiles. 
 ```{r}
 
@@ -141,10 +108,12 @@ Tile webmaps join many map images together.
     options = providerTileOptions(opacity = 0.35)) %>% #changing the opacity settings 
   addProviderTiles(providers$Stamen.TonerLabels)
 #adding labels 
-=======
+```
+
 ## Third-party basemaps
 
 Creating third-party basemaps can be done by searching for different colors and styles of map tiles. 
+
 ```{r}
 blackandwhite.basemap <- standard.basemap %>% # leaflet 
 addProviderTiles(providers$Stamen.Toner)
@@ -153,7 +122,6 @@ blackandwhite.basemap
 
 ```
 
-
 ```{r}
 cartoon.basemap <- standard.basemap %>% # leaflet 
 addProviderTiles(providers$CartoDB.Positron)
@@ -161,6 +129,7 @@ addProviderTiles(providers$CartoDB.Positron)
 cartoon.basemap 
 
 ```
+
 # Displaying a Place
 ```{r}
 
@@ -181,45 +150,25 @@ CSUN
   addProviderTiles(providers$Stamen.TonerLines,
     options = providerTileOptions(opacity = 0.35)) %>% #change opacity
   addProviderTiles(providers$Stamen.TonerLabels)
->>>>>>> 71b7f7e87e1645c62f6e6bb282c89c878e311846
 
  basemap
 
 ```
 
-<<<<<<< HEAD
-
-
-Adding Markers
-```{r}
-
-longitude <- data$longitude #extracting longitude
-latitude <- data$latitude #extracting latitude
-volcanonames <- data$volcano_name #extracting names
-
-volcanomap <- basemap %>% #creating a base map with markers
-=======
 ## Adding Markers
-
 ```{r}
-
 longitude <- data$longitude
 latitude <- data$latitude
 volcanonames <- data$volcano_name
 
 volcanomap <- basemap %>% 
->>>>>>> 71b7f7e87e1645c62f6e6bb282c89c878e311846
 addCircleMarkers(lng = longitude, lat = latitude, popup = volcanonames, radius=3, color="#ffffd14", stroke=FALSE, fillOpacity=1) # add a single point layer
 
 volcanomap
 
 ```
 
-<<<<<<< HEAD
-# Adding markers to maps
-=======
 # Markers
->>>>>>> 71b7f7e87e1645c62f6e6bb282c89c878e311846
 
 First we start with the base function to create a map.
 ```{r}
@@ -266,11 +215,7 @@ leaflet(data) %>%
              label = "Toya volcano") #label name
 ```
 
-<<<<<<< HEAD
-# Customizing marker icons
-=======
 ## Customizing marker icons
->>>>>>> 71b7f7e87e1645c62f6e6bb282c89c878e311846
 
 Markers can be customized in any way, using any icon, image, or color.
 
@@ -324,11 +269,7 @@ leaflet(data) %>%
              icon = leafs) #name for multiple icons code
 ```
 
-<<<<<<< HEAD
-# Customizable Icons with Awesome Icons
-=======
 ## Customizable Icons with Awesome Icons
->>>>>>> 71b7f7e87e1645c62f6e6bb282c89c878e311846
 
 Using the addAwesomeMarkers() function, markers can be customized through their color and icons.
 
@@ -351,11 +292,7 @@ leaflet(data) %>%
                     icon = volcano_icon) #name for icon function
 ```
 
-<<<<<<< HEAD
-# Marker Clusters
-=======
 ## Marker Clusters
->>>>>>> 71b7f7e87e1645c62f6e6bb282c89c878e311846
 
 For many markers grouped together on a single map, the clusterOptions function can be used to group together several markers into one.
 
@@ -373,11 +310,7 @@ leaflet(data) %>%
              clusterOptions = markerClusterOptions()) #code for cluster option
 ```
 
-<<<<<<< HEAD
-# Circle Markers
-=======
 ## Circle Markers
->>>>>>> 71b7f7e87e1645c62f6e6bb282c89c878e311846
 
 Instead of the standard bubble markers, you can opt for circle markers.
 
@@ -402,11 +335,6 @@ leaflet(data) %>%
                    fillOpacity = 0.5) #circle opacity
 ```
 
-<<<<<<< HEAD
-<<<<<<<< HEAD:Leaflet/scripts/leaflet .Rmd
-========
-=======
->>>>>>> 71b7f7e87e1645c62f6e6bb282c89c878e311846
 # Lines and Shapes
 ## Circles
 ```{r}
@@ -417,33 +345,25 @@ leaflet(data) %>%
              fillColor = "transparent")
 ```
 
-<<<<<<< HEAD
-# Circles vrs Circle Markers
-=======
 ## Circles vrs Circle Markers
->>>>>>> 71b7f7e87e1645c62f6e6bb282c89c878e311846
+
 * Circles are similar to circle markers.
 * Circles have their radii specified in meters. 
 * Circle markers are specified in pixels.
 
-<<<<<<< HEAD
-# Observed circles in two different points
-=======
 ## Observed circles in two different points
->>>>>>> 71b7f7e87e1645c62f6e6bb282c89c878e311846
+
 ```{r}
 leaflet(data) %>% 
   addTiles() %>% #add default map
    setView(-86.702, 12.506, zoom = 12) %>% #add specific view of the map in certain area
   addCircles(lng = ~longitude, #add circles to the map using lng and lat
              lat = ~latitude)
+
 ```
 
-<<<<<<< HEAD
-# Circles 
-=======
 ## Circles 
->>>>>>> 71b7f7e87e1645c62f6e6bb282c89c878e311846
+
 ```{r, warning=FALSE}
 leaflet(data) %>% 
   addTiles() %>% #add default map
@@ -452,13 +372,11 @@ leaflet(data) %>%
              lat = ~latitude,
              radius = ~sqrt(elevation) * 26, #change size in the radius of the circles
              fillColor = "transparent") #fill the inside of the circle with a transparent color
+
 ```
 
-<<<<<<< HEAD
-# Circle Markers in two different points
-=======
 ## Circle Markers in two different points
->>>>>>> 71b7f7e87e1645c62f6e6bb282c89c878e311846
+
 ```{r}
 leaflet(data) %>% 
   addTiles() %>% #add default map
@@ -468,11 +386,8 @@ leaflet(data) %>%
              fillColor = "transparent") #fill the inside of the circle with a transparent color
 ```
 
-<<<<<<< HEAD
-# Circles in one specific point
-=======
 ## Circles in one specific point
->>>>>>> 71b7f7e87e1645c62f6e6bb282c89c878e311846
+
 ```{r}
 leaflet(data) %>%
    addTiles() %>% #add default map
@@ -480,14 +395,11 @@ leaflet(data) %>%
   addCircles(-86.688, 12.495, #add circles
              radius = 500, #add radius or size of the circle
              color = "blue") #add color
+
 ```
 
-
-<<<<<<< HEAD
-# Polylines
-=======
 ## Polylines
->>>>>>> 71b7f7e87e1645c62f6e6bb282c89c878e311846
+
 ```{r}
 leaflet(data) %>% 
   addTiles() %>% #add default map
@@ -496,52 +408,38 @@ leaflet(data) %>%
     c(19.475, 19.605, 19.421))
 ```
 
-
-<<<<<<< HEAD
-# Polygons
-=======
 ## Polygons
->>>>>>> 71b7f7e87e1645c62f6e6bb282c89c878e311846
+
 ```{r}
 leaflet(data) %>% 
   addTiles() %>% #add default map
   fitBounds(-155.908, 19.475, -155.287, 19.421) %>% #set the specific points need it for the polygons
   addPolygons(c(-155.908, -155.589, -155.287), #add polygons using three points in longitude and three in latitude
     c(19.475, 19.605, 19.421))
+
 ```
 
-<<<<<<< HEAD
-# Rectangles
-=======
 ## Rectangles
->>>>>>> 71b7f7e87e1645c62f6e6bb282c89c878e311846
+
 ```{r}
 leaflet(data) %>% 
   addTiles() %>% #add default map
   fitBounds(-155.608, 19.475, -155.287, 19.421) %>% #set the specific points need it for the rectangles
   addRectangles(-155.608, 19.475, -155.287, 19.421) #add rectangles
+
 ```
 
-
-<<<<<<< HEAD
-# Rectangle inside of a Mini Map
-=======
 ## Rectangle inside of a Mini Map
->>>>>>> 71b7f7e87e1645c62f6e6bb282c89c878e311846
+
 ```{r}
 leaflet(data) %>% 
   addTiles() %>% #add default map
   fitBounds(-155.608, 19.475, -155.287, 19.421) %>% #set the specific points need it for the rectangles
   addRectangles(-155.608, 19.475, -155.287, 19.421) %>% #add rectangles using 2 values for longitude and 2 for latitude
   addMiniMap() #add a mini map where you can observe the rectangle moving in the mini map
+
 ```
 
-
-<<<<<<< HEAD
-
-
->>>>>>>> 71b7f7e87e1645c62f6e6bb282c89c878e311846:script /leaflet .Rmd
-=======
 # Adding Legends and Shading Points
 ```{r}
 
@@ -566,8 +464,8 @@ leaflet(cities) %>% #city data
 
 ```
 # Displaying a Place 
+
 ```{r}
 
 ```
 
->>>>>>> 71b7f7e87e1645c62f6e6bb282c89c878e311846
