@@ -85,9 +85,14 @@ Combining Tile Layers
  basemap
 
 ```
+Adding Opacity
+
+```{r}
+
+```
+
 
 Adding Markers
-
 ```{r}
 
 longitude <- data$longitude #extracting longitude
