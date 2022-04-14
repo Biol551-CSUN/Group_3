@@ -1,0 +1,229 @@
+---
+title: "Leaflet"
+author: "Ashlee, Margarita, Jocelyn, and Rob"
+date: "4/12/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE, warning=FALSE,message=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction 
+To begin working with Leaflet you will first need to download the package. Use install.packages("leaflet") download this package and load it onto your working script or console.
+Leaflet is an open source JavaScript library used to build web mapping applications. It is designed for simplicity, performance and usability. 
+
+# Libraries 
+```{r, warning=FALSE, message=FALSE}
+library(leaflet)
+library(tidyverse)
+library(dplyr)
+```
+
+
+# Data 
+The data we will be using for our examples is based off of a Tidy Tuesday Dataset on [Volcano Eruptions](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md)
+```{r, warning=FALSE,message=FALSE}
+# Get the Data
+
+volcano <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/volcano.csv')
+eruptions <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/eruptions.csv')
+events <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/events.csv')
+tree_rings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/tree_rings.csv')
+sulfur <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/sulfur.csv')
+view(volcano)
+```
+
+#Wrangling Data 
+
+
+# Base Map
+Creating a standard basemap 
+
+```{r, warning=FALSE, message=FALSE}
+
+standard.basemap <- leaflet() %>% # leaflet 
+ addTiles() %>% 
+setView(lat= 37.5, lng=-95.5, zoom=3)
+
+standard.basemap
+
+```
+
+#Creating third-party basemaps can be done by searching for different colors and styles of map tiles. 
+```{r}
+
+blackandwhite.basemap <- standard.basemap %>% # leaflet 
+addProviderTiles(providers$Stamen.Toner)
+
+cartoon.basemap <- standard.basemap %>% # leaflet 
+addProviderTiles(providers$CartoDB.Positron)
+
+```
+
+#Combining Tile Layers 
+
+```{r}
+
+ basemap <- standard.basemap %>% 
+  addProviderTiles(providers$Stamen.Watercolor) %>%
+  addProviderTiles(providers$Stamen.TonerLines,
+    options = providerTileOptions(opacity = 0.35)) %>% #change opacity
+  addProviderTiles(providers$Stamen.TonerLabels)
+
+ basemap
+
+```
+
+#Adding Markers
+
+```{r}
+data <- full_join(volcano, eruptions) %>% 
+  filter(last_eruption_year >= "1900") %>% 
+  select(-major_rock_1, -major_rock_2, -major_rock_3, -major_rock_4, -major_rock_5,
+         -minor_rock_1, -minor_rock_2, -minor_rock_3, -minor_rock_4, -minor_rock_5,
+         -population_within_5_km, -population_within_10_km, -population_within_30_km, -population_within_100_km,
+         -vei) %>% 
+  drop_na()
+View(data)
+
+```
+
+
+##Lines and Shapes
+#Circles
+```{r}
+leaflet(data) %>%
+  addTiles() %>% #add default map
+  addCircles(lng = ~longitude, #add circles to the map
+             lat = ~latitude,
+             radius = ~sqrt(elevation) * 26,
+             fillColor = "transparent")
+```
+
+
+```
+##Circles vrs Circle Markers
+* Circles are similar to circle markers.
+* Circles have their radii specified in meters. 
+* Circle markers are specified in pixels.
+```{r}
+```
+
+#Circles in two different points
+```{r}
+leaflet(data) %>% 
+  addTiles() %>% #add default map
+   setView(-86.702, 12.506, zoom = 12) %>%
+  addCircles(lng = ~longitude, #add circles to the map
+             lat = ~latitude,
+             radius = ~sqrt(elevation) * 26,
+             fillColor = "transparent")
+```
+
+#Circle Markers in two different points
+```{r}
+leaflet(data) %>% 
+  addTiles() %>% #add default map
+   setView(-86.702, 12.506, zoom = 12) %>%
+  addCircleMarkers(lng = ~longitude, #add circle markers
+             lat = ~latitude,
+             fillColor = "transparent")
+```
+
+
+#Circles in one specific point
+```{r}
+leaflet(data) %>%
+   addTiles() %>% #add default map
+  setView(-86.688, 12.495, zoom = 14) %>%
+  addCircles(-86.688, 12.495,
+             radius = 500,
+             color = "blue")
+```
+
+#Polylines
+```{r}
+leaflet(data) %>% 
+  addTiles() %>% #add default map
+  fitBounds(-155.908, 19.475, -155.287, 19.421) %>%
+  addPolylines(c(-155.908, -155.589, -155.287),
+    c(19.475, 19.605, 19.421))
+```
+
+
+#Polygons
+```{r}
+leaflet(data) %>% 
+  addTiles() %>% #add default map
+  fitBounds(-155.908, 19.475, -155.287, 19.421) %>%
+  addPolygons(c(-155.908, -155.589, -155.287), #add polygons
+    c(19.475, 19.605, 19.421))
+```
+
+#Rectangles
+```{r}
+leaflet(data) %>% 
+  addTiles() %>% #add default map
+  fitBounds(-155.608, 19.475, -155.287, 19.421) %>%
+  addRectangles(-155.608, 19.475, -155.287, 19.421) #add rectangles
+```
+
+#Mini map
+
+```{r}
+leaflet(data) %>% 
+  addTiles() %>% #add default map
+  fitBounds(-155.608, 19.475, -155.287, 19.421) %>%
+  addRectangles(-155.608, 19.475, -155.287, 19.421) %>%
+  addMiniMap() #add a mini map where you can observe the rectangle in the map
+```
+
+`
+
+---
+title: "Leaflet"
+author: "Ashlee, Margarita, Jocelyn, and Rob"
+date: "4/12/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE, warning=FALSE, message=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction 
+To begin working with Leaflet you will first need to download the package. Use install.packages("leaflet") download this package and load it onto your working script or console.
+Leaflet is an open source JavaScript library used to build web mapping applications. It is designed for simplicity, performance and usability. 
+
+# Libraries 
+```{r, warning=FALSE, message=FALSE}
+library(leaflet)
+library(tidyverse)
+library(dplyr)
+```
+
+
+# Data 
+The data we will be using for our examples is based off of a Tidy Tuesday Dataset on [Volcano Eruptions](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-05-12/readme.md)
+```{r, warning=FALSE,message=FALSE}
+# Get the Data
+
+volcano <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/volcano.csv')
+eruptions <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/eruptions.csv')
+events <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/events.csv')
+tree_rings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/tree_rings.csv')
+sulfur <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2020/2020-05-12/sulfur.csv')
+
+```
+Wrangling Data 
+```{r}
+data <- full_join(volcano, eruptions) %>% 
+  filter(last_eruption_year >= "1900") %>% 
+  select(-major_rock_1, -major_rock_2, -major_rock_3, -major_rock_4, -major_rock_5,
+         -minor_rock_1, -minor_rock_2, -minor_rock_3, -minor_rock_4, -minor_rock_5,
+         -population_within_5_km, -population_within_10_km, -population_within_30_km, -population_within_100_km,
+         -vei) %>% 
+  drop_na()
+```
+
