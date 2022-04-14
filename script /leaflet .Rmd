@@ -18,6 +18,7 @@ Leaflet is an open source JavaScript library used to build web mapping applicati
 library(leaflet)
 library(tidyverse)
 library(dplyr)
+library(leaflet.multiopacity)
 ```
 
 
@@ -85,9 +86,21 @@ Combining Tile Layers
  basemap
 
 ```
+Adding Opacity
+
+```{r}
+
+leaflet() %>%
+  addProviderTiles("OpenStreetMap", layerId = "base") %>%
+  addRasterImage(r, layerId = "rast") %>%
+  addAwesomeMarkers(lng = -2.79545, lat = 54.04321,
+                    label = "Hospital", layerId = "hospital") %>%
+  addOpacityControls()
+
+```
+
 
 Adding Markers
-
 ```{r}
 
 longitude <- data$longitude #extracting longitude
