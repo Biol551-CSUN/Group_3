@@ -12,7 +12,7 @@ Jocelyn Martinez Rico: Markers
 
 Margarita Alfaro Hernandez: Lines and shapes
 
-Robert Dellinger: Basemaps
+Robert Dellinger: Basemaps, legends, and conclusion 
 
 ---
 
